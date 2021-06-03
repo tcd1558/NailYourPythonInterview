@@ -1,0 +1,13 @@
+Objects - Responsibility - Collaboratrion
+
+astronaut - 
+authenticator - accept credentials - access to library 
+library - show albums - astronaut selects
+	- show songs of album - astronaut selects
+	- commit selection(astronaut) - playlist adds selection
+
+playlist(queue) - show - player
+	- add selection 
+	- set priority
+	- play song and remove from list
+

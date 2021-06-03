@@ -1,0 +1,47 @@
+Challenge Chapter 3:
+
+Use Case 1
+Title
+
+Title selection
+
+Primary Actor
+
+Austronaut 
+
+Scenario (Paragraph or list)
+
+To access the jukebox, the astronaut must enter a user id (User credentials). 
+This is necessary, to make sure, multiple selections from one astronaut 
+can be moved down in priority and the selection from another astronaut 
+can be played first. 
+
+On the Jukebox interface, the austronaut must be able to select an album and from that album a track. Once a track is selected it is added to the playlist. 
+
+Once there is a song added to the queue, the jukebox should start playing a song
+
+Use Case 2
+Title:
+
+The music afficionado
+
+Primary Actor
+
+Astronaut
+
+Scenario (Paragraph or list)
+
+Provide user credentials of the music afficionado
+Add about 3+ songs to the jukebox queue
+Switch user credentials 
+Add another song to the queue and check, that this song is queued in 3rd postion
+
+
+
+User Story 1 
+As a <<actor>> I want << goal>> so that <<reason>>
+As an astronaut I want to review the queue so that I can see, when my song plays
+
+User Story 2
+As a <<actor>> I want << goal>> so that <<reason>>
+As an astronaut I want to remove one of my songs from the queue so that I can change my mood. 

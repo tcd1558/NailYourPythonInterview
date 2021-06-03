@@ -1,0 +1,19 @@
+
+FURPS
+
+Functional
+1, The Jukebox must be free
+2. The Jukebox allows selecting a track on an albume 
+3. If a user put 3 songs in a row, the next useri's different pick has priority over the 3rd pick
+ 
+Non-functional:
+The system should be easy to use in space
+the system should have an autoplay function
+the system should allow for guests to add tracks into the playlist. 
+new users
+available 24/7
+low power usage
+add new music
+
+
+

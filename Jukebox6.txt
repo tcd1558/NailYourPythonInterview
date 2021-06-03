@@ -1,0 +1,59 @@
+
+Class: User
+---------
++ getId():String
+--------
+
+User<--Admin
+Class Admin(User):
+---------
++ createUser():
++ manageQueue():
+---------
+
+Class Catalog
+---------
+- titles
+---------
++ getTitles():Strings[1..*]
+---------
+
+Catalog<--Library
+Class Library(Catalog)
+---------
+- albums:Albums[1-*]
+---------
++ getAlbum(String):Album
+---------
+
+Catalog<--Album
+Class Album(Catalog)
+---------
+- songs:Songs[1-*]
+---------
++ getSong(String):Song
+---------
+
+Catalog<--Song
+Class Song(Catalog)
+---------
+- artist:String
+---------
++ getArtist():String
++ play()
+---------
+
+Class Queue:
+---------
+- playlist: Songs[0-*]
+---------
++ addSong(Song, UserID)
++ getNextSong(): Song
++ removeSong(Song)
+
+
+
+
+
+
+

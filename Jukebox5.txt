@@ -1,0 +1,97 @@
+Name: Admin
+------------
+class variables:
+instance variables:
+- adminID: String
+------------
+class methods:
+- __privateMethod()__
++ __publicMethod()__
+
+instance methods:
+- privateMethod
++ publicMethod
+
++ getAdminID(): String
++ createUser()
++ manageQueue() - Queue.removeSong(Song)
+------------
+
+Name: User
+------------
+class variables:
+instance variables:
+- UserID=int
+------------
+class methods:
+instance methods:
+
++ getUserID():String - If there is no ID for a user, the user has bo access. 
++ getLibrary(): list of Albums
+-----------------
+
+Name: Library
+-------------
+class variables:
+instance variables:
+------------
+class methods:
+instance methods:
+
++ getAlbumTitles(): list of title strings 
++ getAlbum(titleString):Album 
+------------
+
+Name: Album
+-------------
+class variables:
+instance variables:
+
++artist=String
++title=String
+------------
+class methods:
+instance methods:
+
++ getAlbumSongs(): list of songs
++ getSong(String): Song 
+------------
+
+
+Name: Song
+-------------
+class variables:
+instance variables:
+
++artist=String
++albumTitle=String
++songTitle=String
++songID=int
+------------
+class methods:
+instance methods:
+
++ playSong(Song): audio of Song
+-------------
+
+
+Name: Queue
+-------------
+class variables:
+instance variables:
+
++artist=String
++albumTitle=String
++songTitle=String
+------------
+class methods:
+instance methods:
+
++ addSong(Song, UserID): 
++ getNextSong(): SongID
++ removeSong(SongID)
++ getAccess(UserID): boolean
+------------ 
+
+
+

@@ -1,0 +1,197 @@
+
+"""
+    Design an EV Charging Station.
+"""
+import time 
+
+class EVProfile():
+    """
+        Store EV data including:
+            - EV name
+            - current range in miles
+            - maximum range in miles
+            
+        Key functionaily:
+            - Set current range
+    """
+    
+    def __init__(self, name, curmiles, maxmiles):
+      self.name = name
+      self.cur_miles = curmiles
+      self.max_miles = maxmiles
+      
+    def set_cur_miles(self, miles):
+      self.cur_miles=miles
+      
+class UserProfile:
+    """
+        Store user profile including:
+            - username
+            - password
+            - EVs: a list of EVProfile
+            - main EV
+
+        Key functionality:
+            - Add EVProfile
+            - Set main EV
+    """
+    
+    def __init__(self, username, password):
+      self.username=username
+      self.password=password
+      self.evlist=[]
+      self.mainEV=None
+      
+    def add_EVProfile(self,my_EVProfile):
+      if my_EVProfile not in self.evlist:
+        self.evlist.append(my_EVProfile)
+        if self.mainEV == None:
+          self.mainEV=my_EVProfile
+        
+    def set_mainEV(self, my_EVProfile):
+      if len(self.evlist) > 1:
+        if my_EVProfile in self.evlist:
+          self.mainEV = my_EVProfile
+        else:
+          print("ERROR: profile not available")
+            
+class EVChargingStation:
+    """
+        25 RPH (range of miles per hour)
+
+        Key functionality:
+            - Create user profile
+            - Get user profile by username and password
+            - Start charging
+            - Stop charging
+    """
+    
+    def __init__(self):
+      self.rph=25
+      self.user_profiles=[]
+      self.curr_user = None
+      self.start_charging = None
+      self.stop_charging = None
+    
+    def create_user_profile(self, my_userProfile):
+      if my_userProfile not in self.user_profiles:
+        self.user_profiles.append(my_userProfile)    
+      
+    def get_user_profile(self, username, password):
+      # check whether username in user_profiles
+      user_known = False
+      for user_profile in self.user_profiles:
+        if username == user_profile.username:
+          user_known = True
+          # if username is inside user_profiles, verify its password
+          if user_profile.password == password:
+            print("Access granted")
+            self.curr_user=user_profile
+          else:
+            print("Access denied")        
+          break
+      if user_known == False:
+        print("ERROR: Unknown user")
+
+    def StartCharging(self):
+      print("entering start_charging")
+      
+      if self.curr_user.mainEV.cur_miles != self.curr_user.mainEV.max_miles:
+        print('set start time')
+        self.start_charging = time.time()
+          
+      print("self.curr_user.mainEV.cur_miles: ", self.curr_user.mainEV.cur_miles)
+      print("start time: ", self.start_charging)  
+      # update cur_miles with new charge
+        
+        
+        
+    def StopCharging(self):
+      # when called, charging is stopped
+      # update the cur_miles according to time change
+      # This can occure, when max_miles has been reached
+      #   or
+      # the user decides the charge is enough
+      if self.start_charging != None:
+        self.stop_charging = time.time()
+        
+      print("self.stop_charging: ", self.stop_charging)
+        
+      # how long did you charge:
+      # Assume, substraction of time values return a number of seconds
+      self.charging_time = self.stop_charging - self.start_charging
+        
+      # 25 miles range per hour
+      # Since I have seconds, I need to device the RPH by 3600
+      # Multiply that value with the charging_time in seconds
+      # Result is the miles added. 
+      
+      miles_added=(self.rph/3600) * self.charging_time
+      
+      # add these miles_added to the EVProfile
+      if self.curr_user.mainEV.cur_miles + miles_added < self.curr_user.mainEV.max_miles:
+        self.curr_user.mainEV.cur_miles += miles_added
+      else:
+        self.curr_user.mainEV.cur_miles = self.curr_user.mainEV.max_miles
+          
+      self.start_charging = None
+        
+      print("self.curr_user.mainEV.cur_miles", self.curr_user.mainEV.cur_miles)
+      print("charging time: ", self.charging_time)     
+    
+def main():
+    """
+        - EVProfile:
+            nissan, 50, 200
+            ford, 50, 250
+            tesla, 50, 300
+
+        - UserProfile:
+            anh, 123456
+            add EV: nissan
+
+            marcos, 123456
+            add EV: ford, tesla
+            set main EV: tesla
+
+        - EVChargingStation
+            create user profile: anh & marcos
+            get user profile: marcos
+            start charging
+            wait for 1hr
+            stop charging
+    """
+    
+    nissan = EVProfile('nissan', 50, 200)
+    ford = EVProfile('ford', 50, 250)
+    tesla = EVProfile('tesla', 50, 300)
+    
+    anh = UserProfile('anh', '123456')
+    marcos = UserProfile('marcos', '123456')
+
+    anh.add_EVProfile(nissan)
+    marcos.add_EVProfile(ford)
+    marcos.add_EVProfile(tesla)
+    marcos.set_mainEV(tesla)
+    
+    print("initialize station")
+    station = EVChargingStation()
+    print(" add profile 1")
+    station.create_user_profile(anh)
+    print("add profile 2")
+    station.create_user_profile(marcos)
+    print("get user profile")
+    station.get_user_profile('marcos', '123456')
+    
+    
+    print("start charging")
+    station.StartCharging()
+    sleeptime=10
+    print('Charging for: ', sleeptime, ' seconds' )
+    time.sleep(sleeptime)
+    print("stop charging")
+    station.StopCharging()
+
+if __name__ == '__main__':
+    main()
+
